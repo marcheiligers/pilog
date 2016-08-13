@@ -1,6 +1,5 @@
-<h1>Editing Log</h1>
-
-<%= render 'form', log: @log %>
+<%= render 'header' %>
+<%= render 'form', log: @log, readonly: false %>
 
 <%= link_to 'Show', @log %> |
 <%= link_to 'Back', logs_path %>
