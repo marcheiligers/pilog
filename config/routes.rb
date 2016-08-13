@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'dashboard#index', as: :dashboard
+
   resources :logs do
     collection do
       get :last

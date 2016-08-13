@@ -1,4 +1,5 @@
 class LogsController < ApplicationController
+  before_action :set_current_nav
   before_action :set_log, only: [:show, :edit, :update, :destroy]
 
   # GET /logs
@@ -75,5 +76,9 @@ class LogsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def log_params
       params.require(:log).permit(:content)
+    end
+
+    def set_current_nav
+      @current_nav = :logs
     end
 end
