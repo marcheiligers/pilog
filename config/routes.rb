@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :weathers
   root 'dashboard#index', as: :dashboard
 
   resources :logs do

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  location: MyString
+  sensor: MyString
+  humidity: 1
+  temperature: 1
+
+two:
+  location: MyString
+  sensor: MyString
+  humidity: 1
+  temperature: 1
