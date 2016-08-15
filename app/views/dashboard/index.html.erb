@@ -36,7 +36,7 @@
     gaugeData = new google.visualization.DataTable();
     gaugeData.addColumn('number', 'Temperature');
     gaugeData.addRows(1);
-    gaugeData.setCell(0, 0, <%= @weather.last.temperature %>);
+    gaugeData.setCell(0, 0, <%= @weathers.last.temperature %>);
 
     gauge = new google.visualization.Gauge(document.getElementById('temperature_gauge'));
     gauge.draw(gaugeData, gaugeOptions);
