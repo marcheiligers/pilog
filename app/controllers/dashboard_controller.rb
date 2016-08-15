@@ -4,6 +4,7 @@ class DashboardController < ApplicationController
   def index
     @log = Log.last
     @weather = Weather.last
+    @weathers = Weather.last(1440)
   end
 
 private

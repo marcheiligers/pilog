@@ -16,8 +16,10 @@
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
+  google.charts.load('current', {'packages':['gauge', 'line', 'corechart']});
+</script>
+<script type="text/javascript">
 (function() {
-  google.charts.load('current', {'packages':['gauge']});
   google.charts.setOnLoadCallback(drawTemperatureGuage);
   var gaugeOptions = {
     min: 0,
@@ -44,6 +46,54 @@
     gaugeData.setValue(0, 0, gaugeData.getValue(0, 0) + dir * 25);
     gaugeData.setValue(0, 1, gaugeData.getValue(0, 1) + dir * 20);
     gauge.draw(gaugeData, gaugeOptions);
+  }
+})();
+</script>
+<% end %>
+
+<% if @weathers.present? %>
+<div id="weather_chart"></div>
+
+<script>
+(function() {
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var chartDiv = document.getElementById('weather_chart');
+
+    var data = new google.visualization.DataTable();
+    data.addColumn('date', 'Time');
+    data.addColumn('number', "Temperature");
+    data.addColumn('number', "Humidity");
+
+    data.addRows([
+    <%= @weathers.map do |weather|
+          ["[new Date(#{weather.created_at.year}, #{weather.created_at.month}, #{weather.created_at.day}, #{weather.created_at.hour}, #{weather.created_at.min}),#{weather.temperature},#{weather.humidity}]"]
+        end.join(",\n").html_safe %>
+    ]);
+
+    var materialOptions = {
+      chart: {
+        title: 'Temperature and Humidity'
+      },
+      width: 900,
+      height: 500,
+      series: {
+        // Gives each series an axis name that matches the Y-axis below.
+        0: {axis: 'Temperature'},
+        1: {axis: 'Humidity'}
+      },
+      axes: {
+        // Adds labels to each axis; they don't have to match the axis names.
+        y: {
+          Temps: {label: 'Temperature'},
+          Daylight: {label: 'Humidity'}
+        }
+      }
+    };
+
+    var materialChart = new google.charts.Line(chartDiv);
+    materialChart.draw(data, materialOptions);
   }
 })();
 </script>
