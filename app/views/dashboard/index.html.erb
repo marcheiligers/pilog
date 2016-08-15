@@ -11,7 +11,7 @@
   <%= @log.content %>
 </div>
 
-<% if @weather.present? %>
+<% if @weathers.present? %>
 <div id="temperature_gauge"></div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -36,7 +36,7 @@
     gaugeData = new google.visualization.DataTable();
     gaugeData.addColumn('number', 'Temperature');
     gaugeData.addRows(1);
-    gaugeData.setCell(0, 0, 28);
+    gaugeData.setCell(0, 0, <%= @weather.last.temperature %>);
 
     gauge = new google.visualization.Gauge(document.getElementById('temperature_gauge'));
     gauge.draw(gaugeData, gaugeOptions);
@@ -49,9 +49,7 @@
   }
 })();
 </script>
-<% end %>
 
-<% if @weathers.present? %>
 <div id="weather_chart"></div>
 
 <script>
